@@ -54,8 +54,6 @@ public class ConversationListArchiveFragment extends ConversationListFragment
 {
   private RecyclerView                list;
   private View                        emptyState;
-  private PulsingFloatingActionButton fab;
-  private PulsingFloatingActionButton cameraFab;
 
   public static ConversationListArchiveFragment newInstance() {
     return new ConversationListArchiveFragment();
@@ -72,17 +70,12 @@ public class ConversationListArchiveFragment extends ConversationListFragment
     super.onViewCreated(view, savedInstanceState);
 
     list          = view.findViewById(R.id.list);
-    fab           = view.findViewById(R.id.fab);
-    cameraFab     = view.findViewById(R.id.camera_fab);
     emptyState    = view.findViewById(R.id.empty_state);
 
     ((AppCompatActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     Toolbar toolbar = view.findViewById(R.id.toolbar_basic);
     toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
     toolbar.setTitle(R.string.AndroidManifest_archived_conversations);
-
-    fab.hide();
-    cameraFab.hide();
   }
 
   @Override

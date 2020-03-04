@@ -200,11 +200,12 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
     toolbar.setVisibility(View.VISIBLE);
     ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
 
-    fab.show();
-    cameraFab.show();
+    fab.hide();
+    cameraFab.hide();
 
     reminderView.setOnDismissListener(this::updateReminders);
 
+    list.setVisibility(View.GONE);
     list.setHasFixedSize(true);
     list.setLayoutManager(new LinearLayoutManager(getActivity()));
     list.setItemAnimator(new DeleteItemAnimator());
@@ -567,7 +568,7 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
 
   private void handleHelp() {
     try {
-      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://support.signal.org")));
+      startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://web.imbox.me/faq")));
     } catch (ActivityNotFoundException e) {
       Toast.makeText(requireActivity(), R.string.ConversationListActivity_there_is_no_browser_installed_on_your_device, Toast.LENGTH_LONG).show();
     }
@@ -677,14 +678,14 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
 
   @Override
   public void onLoadFinished(@NonNull Loader<Cursor> arg0, Cursor cursor) {
-    if (cursor == null || cursor.getCount() <= 0) {
-      list.setVisibility(View.INVISIBLE);
+    if (cursor == null || cursor.getCount() <= 0 || true) {
+      list.setVisibility(View.GONE);
       emptyState.setVisibility(View.VISIBLE);
       emptyImage.setImageResource(EMPTY_IMAGES[(int) (Math.random() * EMPTY_IMAGES.length)]);
       fab.startPulse(3 * 1000);
       cameraFab.startPulse(3 * 1000);
     } else {
-      list.setVisibility(View.VISIBLE);
+      list.setVisibility(View.GONE);
       emptyState.setVisibility(View.GONE);
       fab.stopPulse();
       cameraFab.stopPulse();
