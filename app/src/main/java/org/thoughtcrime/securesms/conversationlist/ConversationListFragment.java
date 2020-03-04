@@ -274,9 +274,6 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
     menu.clear();
 
     inflater.inflate(R.menu.text_secure_normal, menu);
-
-    menu.findItem(R.id.menu_insights).setVisible(TextSecurePreferences.isSmsEnabled(requireContext()));
-    menu.findItem(R.id.menu_clear_passphrase).setVisible(!TextSecurePreferences.isPasswordDisabled(requireContext()));
   }
 
   @Override
@@ -286,10 +283,7 @@ public class ConversationListFragment extends MainFragment implements LoaderMana
     switch (item.getItemId()) {
       case R.id.menu_new_group:         handleCreateGroup();     return true;
       case R.id.menu_settings:          handleDisplaySettings(); return true;
-      case R.id.menu_clear_passphrase:  handleClearPassphrase(); return true;
-      case R.id.menu_mark_all_read:     handleMarkAllRead();     return true;
       case R.id.menu_invite:            handleInvite();          return true;
-      case R.id.menu_insights:          handleInsights();        return true;
       case R.id.menu_help:              handleHelp();            return true;
     }
 
